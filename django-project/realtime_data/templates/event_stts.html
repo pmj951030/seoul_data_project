@@ -1,0 +1,72 @@
+<!-- 정보팀담당자 -->
+{%extends 'base.html'%}
+{% block content %}
+
+
+{% include 'search_button.html'%}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}"> 
+
+
+<div class="table-container">
+<table class="table table-striped table-bordered mt-3 fixed-width-table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">수집시간</th>
+        <th scope="col">핫스팟 코드명</th>
+        <th scope="col">핫스팟 장소명</th>
+        <th scope="col">문화행사명</th>
+        <th scope="col">문화행사 기간</th>
+        <th scope="col">문화행사 장소</th>
+        <th scope="col">문화행사 기타 세부정보</th>
+
+    </tr>
+    </thead>
+    <tbody>
+        {% for item in key %}
+        <tr>
+            <td>{{item.id }}</td>
+            <td>{{item.file_id}}</td>
+            <td>{{item.AREA_CD}}</td>
+            <td>{{item.AREA_NM}}</td>
+            <td>{{item.EVENT_NM}}</td>
+            <td>{{item.EVENT_PERIOD}}</td>
+            <td>{{item.EVENT_PLACE}}</td>
+            <td>{{item.EVENT_ETC_DETAIL}}</td>
+            
+        </tr>
+        {%endfor%}
+
+    </tbody>
+</table>
+</div>
+
+
+<!-- 페이지스크롤 -->
+{% if is_paginated %}
+    <div class="d-flex justify-content-center">
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page=1">처음</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">이전</a></li>
+            {% endif %}
+
+            {% for num in page_obj.paginator.page_range %}
+            {% if num == page_obj.number %}
+                <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+            {% elif num > page_obj.number|add:"-5" and num < page_obj.number|add:"5" %}
+                <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+            {% endif %}
+        {% endfor %}
+
+            {% if page_obj.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">다음</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">마지막</a></li>
+            {% endif %}
+        </ul>
+    </div>
+{% endif %}
+
+{% endblock content%}

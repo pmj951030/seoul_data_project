@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary" >
+    <div class="container-fluid">
+    <a class="navbar-brand" href="http://127.0.0.1:8000/">서울실시간데이터</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+
+        <li class="nav-item">
+            <a class="btn btn-outline-primary me-2" href="{% url '서울실시간데이터:행사정보' %}" >행사정보</a>
+        </li>
+        <li class="nav-item">
+            <a class="btn btn-outline-primary me-2" href="{% url '서울실시간데이터:시간별인구예상' %}" >시간별 인구예상</a>
+        </li>
+        <li class="nav-item">
+            <a class="btn btn-outline-primary me-2" href="{% url '서울실시간데이터:시간별예상날씨12' %}" >시간별 예상 날씨(12시간)</a>
+        </li>
+        <li class="nav-item">
+            <a class="btn btn-outline-primary me-2" href="{% url '서울실시간데이터:시간별예상날씨24' %}" >시간별 예상 날씨(24시간)</a>
+        </li>
+        <li class="nav-item">
+            <a class="btn btn-outline-primary me-2" href="{% url '서울실시간데이터:실시간인구현황' %}" >실시간 인구현황</a>
+        </li>
+        <li class="nav-item">
+            <a class="btn btn-outline-primary me-2" href="{% url '서울실시간데이터:실시간날씨' %}" >실시간 날씨</a>
+        </li>
+        </ul>
+    </div>
+    </div>
+</nav>

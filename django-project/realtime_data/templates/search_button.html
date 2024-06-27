@@ -1,0 +1,16 @@
+<!-- pnk_people -->
+
+<form method="GET">
+    <div class="input-group mb-3" style="width: 300px;">
+        <input type="text" class="form-control" placeholder="검색어 입력" name="q" {% if search_query %}value="{{ search_query }}"{% endif %}>
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="submit">검색</button>
+            {% if search_query %}
+                <a href="?" class="btn btn-outline-secondary">취소</a>
+            {% endif %}
+        </div>
+    </div>
+    {% if search_query %}
+        <div>현재 "{{ search_query }}" 로 검색 중입니다.</div>
+    {% endif %}
+</form>

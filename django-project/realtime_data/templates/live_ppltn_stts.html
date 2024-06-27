@@ -1,0 +1,104 @@
+<!-- 정보팀담당자 -->
+{%extends 'base.html'%}
+{% block content %}
+
+
+{% include 'search_button.html'%}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}"> 
+
+
+<div class="table-container">
+<table class="table table-striped table-bordered mt-3 fixed-width-table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">수집시간</th>
+        <th scope="col">핫스팟 코드명</th>
+        <th scope="col">핫스팟 장소명</th>
+        <th scope="col">장소 혼잡도 지표</th>
+        <th scope="col">장소 혼잡도 지표 관련 메세지</th>
+        <th scope="col">실시간 인구 지표 최소값</th>
+        <th scope="col">실시간 인구 지표 최대값</th>
+        <th scope="col">남성 인구 비율(남성)</th>
+        <th scope="col">여성 인구 비율(여성)</th>
+        <th scope="col">0~10세 인구 비율</th>
+        <th scope="col">10대 실시간 인구 비율</th>
+        <th scope="col">20대 실시간 인구 비율</th>
+        <th scope="col">30대 실시간 인구 비율</th>
+        <th scope="col">40대 실시간 인구 비율</th>
+        <th scope="col">50대 실시간 인구 비율</th>
+        <th scope="col">60대 실시간 인구 비율</th>
+        <th scope="col">70대 실시간 인구 비율</th>
+        <th scope="col">상주 인구 비율</th>
+        <th scope="col">비상주 인구 비율</th>
+        <th scope="col">대체 데이터 여부</th>
+        <th scope="col">실시간 인구 데이터 업데이트 시간</th>
+        <th scope="col">예측값 제공 여부</th>
+
+
+
+    </tr>
+    </thead>
+    <tbody>
+        {% for item in key %}
+        <tr>
+            <td>{{item.id }}</td>
+            <td>{{item.file_id}}</td>
+            <td>{{item.AREA_CD}}</td>
+            <td>{{item.AREA_NM}}</td>
+            <td>{{item.AREA_CONGEST_LVL}}</td>
+            <td>{{item.AREA_CONGEST_MSG}}</td>
+            <td>{{item.AREA_PPLTN_MIN}}</td>
+            <td>{{item.AREA_PPLTN_MAX}}</td>
+            <td>{{item.MALE_PPLTN_RATE}}</td>
+            <td>{{item.FEMALE_PPLTN_RATE}}</td>
+            <td>{{item.PPLTN_RATE_0}}</td>
+            <td>{{item.PPLTN_RATE_10}}</td>
+            <td>{{item.PPLTN_RATE_20}}</td>
+            <td>{{item.PPLTN_RATE_30}}</td>
+            <td>{{item.PPLTN_RATE_40}}</td>
+            <td>{{item.PPLTN_RATE_50}}</td>
+            <td>{{item.PPLTN_RATE_60}}</td>
+            <td>{{item.PPLTN_RATE_70}}</td>
+            <td>{{item.RESNT_PPLTN_RATE}}</td>
+            <td>{{item.NON_RESNT_PPLTN_RATE}}</td>
+            <td>{{item.REPLACE_YN}}</td>
+            <td>{{item.PPLTN_TIME}}</td>
+            <td>{{item.FCST_YN}}</td>
+            
+        </tr>
+        {%endfor%}
+
+    </tbody>
+</table>
+</div>
+
+
+<!-- 페이지스크롤 -->
+{% if is_paginated %}
+    <div class="d-flex justify-content-center">
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page=1">처음</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">이전</a></li>
+            {% endif %}
+
+            {% for num in page_obj.paginator.page_range %}
+            {% if num == page_obj.number %}
+                <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+            {% elif num > page_obj.number|add:"-5" and num < page_obj.number|add:"5" %}
+                <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+            {% endif %}
+        {% endfor %}
+
+            {% if page_obj.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">다음</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">마지막</a></li>
+            {% endif %}
+        </ul>
+    </div>
+{% endif %}
+
+{% endblock content%}

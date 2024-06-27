@@ -1,0 +1,11 @@
+django-project/etc/
+django-project/venv/
+django-project/db.sqlite3
+
+seoul_project/etc/
+seoul_project/venv/
+seoul_project/logs/
+seoul_project/files/
+
+*__pycache__*
+*.env*
